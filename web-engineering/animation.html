@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directional Animated CSS Grid</title>
+  <style>
+    /* ==========================================
+       1. GLOBAL RESET & BASE STYLES
+       ========================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f172a; /* Deep dark slate */
+      color: #fff;
+      padding: 40px 20px;
+      overflow-x: hidden; /* Prevents scrollbars during side-sliding entrance */
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #f8fafc;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #94a3b8;
+    }
+
+    /* ==========================================
+       2. GRID CONTAINER
+       ========================================== */
+    .animated-grid {
+      display: grid;
+      grid-template-columns: 250px 1fr 1fr;
+      grid-template-rows: 80px 300px 60px;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      grid-template-areas:
+        "header header header"
+        "sidebar content content"
+        "footer footer footer";
+    }
+
+    /* Base Grid Item Styles */
+    .grid-item {
+      color: white;
+      padding: 20px;
+      font-weight: bold;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      
+      /* Smooth transition for mouse hover effects */
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .grid-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ==========================================
+       3. ASSIGNING DIRECTIONAL ANIMATIONS
+       ========================================== */
+    
+    /* --- LEFT TO RIGHT ANIMATION GROUP --- */
+    .header {
+      grid-area: header;
+      background-color: #3b82f6; /* Blue */
+      animation: slideFromLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 0.1s;
+    }
+
+    .sidebar {
+      grid-area: sidebar;
+      background-color: #0ea5e9; /* Light Blue */
+      animation: slideFromLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 0.3s; /* Slightly staggered staggered delay */
+    }
+
+    /* --- RIGHT TO LEFT ANIMATION GROUP --- */
+    .content {
+      grid-area: content;
+      background-color: #8b5cf6; /* Purple */
+      animation: slideFromRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 0.2s;
+    }
+
+    .footer {
+      grid-area: footer;
+      background-color: #ec4899; /* Pink */
+      animation: slideFromRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 0.4s;
+    }
+
+    /* ==========================================
+       4. KEYFRAMES FOR DIRECTIONS
+       ========================================== */
+       
+    /* Left to Right Entrance */
+    @keyframes slideFromLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-150px); /* Starts far out to the left */
+        filter: blur(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0); /* Settles at its natural grid position */
+        filter: blur(0);
+      }
+    }
+
+    /* Right to Left Entrance */
+    @keyframes slideFromRight {
+      from {
+        opacity: 0;
+        transform: translateX(150px); /* Starts far out to the right */
+        filter: blur(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0); /* Settles at its natural grid position */
+        filter: blur(0);
+      }
+    }
+
+    /* ==========================================
+       5. RESPONSIVE BREAKPOINT
+       ========================================== */
+    @media (max-width: 768px) {
+      .animated-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+          "header"
+          "sidebar"
+          "content"
+          "footer";
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Choreographed Directional Grid</h1>
+  <p class="subtitle">Refresh the page to view the left-and-right split intersection layout.</p>
+
+  <div class="animated-grid">
+    <header class="grid-item header">Header (← Left to Right)</header>
+    <aside class="grid-item sidebar">Sidebar (← Left to Right)</aside>
+    <main class="grid-item content">Main Content (Right to Left →)</main>
+    <footer class="grid-item footer">Footer (Right to Left →)</footer>
+  </div>
+
+</body>
+</html>

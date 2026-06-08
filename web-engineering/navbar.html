@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Left/Right Navbar</title>
+  </head>
+  <body>
+    <header>
+      <!-- Logo stays pinned to the left side -->
+      <a href="#" class="logo-link">
+        <img src="images/logo.svg" alt="Logo" class="logo" />
+      </a>
+
+      <!-- Navigation items stay pinned to the right side -->
+      <nav class="navbar">
+        <ul>
+          <li><a href="#">How We Work</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Account</a></li>
+          <li><a href="#" class="btn-nav">View Plans</a></li>
+        </ul>
+      </nav>
+    </header>
+  </body>
+
+  <style>
+    /* 1. Reset Defaults */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #fafafa;
+    }
+
+    /* 2. Header Layout (Left / Right Alignment) */
+    header {
+      height: 70px;
+      display: flex;
+      justify-content: space-between; /* Pushes logo left, navbar right */
+      align-items: center;
+      padding: 0 4%;
+      background: #ffffff;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      height: 22px;
+      width: auto;
+    }
+
+    /* 3. Navigation Menu Items */
+    .navbar ul {
+      display: flex;
+      align-items: center;
+      list-style: none;
+    }
+
+    .navbar li {
+      margin-left: 28px; /* Spaces links out from each other */
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #666666;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      transition: color 0.2s ease;
+    }
+
+    .navbar a:hover:not(.btn-nav) {
+      color: #2d2640;
+    }
+
+    /* 4. Action Button Styling */
+    .btn-nav {
+      border: 1.5px solid #2d2640;
+      padding: 8px 20px;
+      border-radius: 4px;
+      color: #2d2640 !important;
+      font-weight: 600;
+      transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .btn-nav:hover {
+      background-color: #2d2640;
+      color: #ffffff !important;
+    }
+
+    /* 5. Mobile Layout (Keeps left/right alignment on small screens) */
+    @media (max-width: 600px) {
+      header {
+        padding: 0 15px; /* Slightly tighter padding on phone screens */
+      }
+
+      .navbar li {
+        margin-left: 12px; /* Pulls links closer together on small mobile devices */
+      }
+
+      .navbar a {
+        font-size: 12px; /* Shrinks text slightly to prevent layout wrapping */
+      }
+
+      .btn-nav {
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</html>

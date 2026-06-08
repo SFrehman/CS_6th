@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horizontal Layout</title>
+    <style>
+      /* Keeps all items in a single horizontal row */
+      body {
+        margin: 0;
+        padding: 10px;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        box-sizing: border-box;
+
+        /* Layout structure */
+        display: grid;
+        gap: 15px;
+        grid-template-columns: 1fr 2fr 1fr;
+        align-items: stretch; /* Forces columns to be equal height */
+        height: calc(100vh - 20px); /* Makes row fill viewport height */
+      }
+
+      /* Centers text horizontally and vertically inside columns */
+      body > * {
+        padding: 15px;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center; /* Horizontal centering */
+        align-items: center; /* Vertical centering */
+        text-align: center;
+      }
+
+      .aside {
+        background-color: #fca5a5;
+      }
+
+      article {
+        background-color: #bae6fd;
+        border: 2px solid #0f172a;
+      }
+
+      .one {
+        background-color: #e2e8f0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Best for two secondary sidebars (e.g., Ads + Meta links) -->
+    <aside class="aside">Advertisements</aside>
+    <article>Primary Page Content</article>
+    <aside class="one">Popular Posts</aside>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Validation App</title>
+    <style>
+        /* Base / Mobile Styles (Under 768px wide) */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            
+            /* Smooth background animation transition */
+            background-color: lightcoral; 
+            transition: background-color 0.5s ease; 
+        }
+
+        /* Container styling */
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 280px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* Error text style using your preferred exact syntax hook */
+        .error-text {
+            color: red;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* --- MEDIA QUERY ANIMATION STEP ---
+           When the screen is 768px wide or wider, 
+           the background smoothly cross-fades to green.
+        */
+        @media (min-width: 768px) {
+            body {
+                background-color: mediumseagreen;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Join Us</h2>
+        <form onsubmit="validateForm(event)">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Type your username...">
+                
+                <span id="userError" class="error-text" hidden="true">Username cannot be blank!</span>
+            </div>
+            
+            <button type="submit">Submit Form</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm(event) {
+            // Stops the form from refreshing the page on click
+            event.preventDefault(); 
+            
+            const usernameInput = document.getElementById('username');
+            const errorSpan = document.getElementById('userError');
+
+            // Form validation check
+            if (usernameInput.value.trim() === "") {
+                // SHOW ERROR: sets the hidden attribute state to false
+                errorSpan.hidden = false;
+            } else {
+                // HIDE ERROR: sets the hidden attribute state back to true
+                errorSpan.hidden = true;
+                alert("Awesome! Form submitted successfully.");
+            }
+        }
+    </script>
+
+</body>
+</html>

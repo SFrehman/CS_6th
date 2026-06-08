@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Time Display</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+        }
+        #clock {
+            display: none;
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="showTimeBtn" onclick="showCurrentTime()">Show Current Time</button>
+
+    <div id="clock"></div>
+
+    <script>
+        function showCurrentTime() {
+            // 1. Hide the button
+            document.getElementById('showTimeBtn').style.display = 'none';
+            
+            const clockDisplay = document.getElementById('clock');
+            // 2. Show the clock container
+            clockDisplay.style.display = 'block';
+            
+            // Function to update the clock digits
+            function updateClock() {
+                const now = new Date();
+                // Formats the time to a clean, localized string (e.g., 12:34:56 AM)
+                clockDisplay.textContent = now.toLocaleTimeString();
+            }
+
+            // 3. Run it immediately so there is no 1-second delay
+            updateClock(); 
+            
+            // 4. Keep it updating every second
+            setInterval(updateClock, 1000);
+        }
+    </script>
+
+</body>
+</html>

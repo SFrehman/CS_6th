@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Grid Master Reference</title>
+  <style>
+    /* ==========================================
+       1. GLOBAL STYLES & RESET
+       ========================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f6fa;
+      color: #333;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin-top: 40px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+    }
+
+    .description {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #7f8c8d;
+    }
+
+    /* Common box styles for both grids */
+    .box {
+      color: white;
+      padding: 20px;
+      font-weight: bold;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    /* ==========================================
+       2. METHOD 1: COLUMNS & ROWS (BY NUMBERS)
+       ========================================== */
+    .grid-by-numbers {
+      display: grid;
+      /* 3 columns: 250px wide, and the rest split 50/50 */
+      grid-template-columns: 250px 1fr 1fr;
+      /* 3 explicit rows */
+      grid-template-rows: 80px 250px 60px;
+      gap: 15px;
+    }
+
+    /* Positioning using line numbers (Start / End) */
+    .num-header {
+      grid-column: 1 / 4; /* Spans from line 1 to line 4 (all 3 columns) */
+      grid-row: 1;
+      background-color: #2ecc71;
+    }
+
+    .num-sidebar {
+      grid-column: 1;     /* Stays in column 1 */
+      grid-row: 2;        /* Stays in row 2 */
+      background-color: #3498db;
+    }
+
+    .num-content {
+      grid-column: 2 / 4; /* Spans from column line 2 to 4 */
+      grid-row: 2;
+      background-color: #e74c3c;
+    }
+
+    .num-footer {
+      grid-column: 1 / 4; /* Spans across all columns at the bottom */
+      grid-row: 3;
+      background-color: #9b59b6;
+    }
+
+
+    /* ==========================================
+       3. METHOD 2: GRID AREAS (VISUAL MAP)
+       ========================================== */
+    .grid-by-areas {
+      display: grid;
+      /* Same track dimensions as above */
+      grid-template-columns: 250px 1fr 1fr;
+      grid-template-rows: 80px 250px 60px;
+      gap: 15px;
+      
+      /* The visual map mapping names to the grid cells */
+      grid-template-areas:
+        "head head head"
+        "side main main"
+        "foot foot foot";
+    }
+
+    /* Assigning elements to their mapped areas */
+    .area-header {
+      grid-area: head;
+      background-color: #1abc9c;
+    }
+
+    .area-sidebar {
+      grid-area: side;
+      background-color: #34495e;
+    }
+
+    .area-content {
+      grid-area: main;
+      background-color: #e67e22;
+    }
+
+    .area-footer {
+      grid-area: foot;
+      background-color: #7f8c8d;
+    }
+
+
+    /* ==========================================
+       4. RESPONSIVE MEDIA QUERY
+       ========================================== */
+    @media (max-width: 768px) {
+      /* Drop both grids into a single scrolling column for mobile */
+      .grid-by-numbers, .grid-by-areas {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto; /* Let content dictate height on mobile */
+      }
+
+      /* Reset layout lines for Method 1 */
+      .num-header, .num-sidebar, .num-content, .num-footer {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      /* Re-map areas to a vertical stack for Method 2 */
+      .grid-by-areas {
+        grid-template-areas:
+          "head"
+          "side"
+          "main"
+          "foot";
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Grid Comprehensive Code Blueprint</h1>
+  <p class="description">Resize your browser window to see how both layouts drop into mobile-friendly stacks.</p>
+
+  <h2>Method 1: Row & Column Numbers</h2>
+  <p class="description">Structured explicitly via line indices: <code>grid-column: 1 / 4;</code></p>
+  
+  <div class="grid-by-numbers">
+    <div class="box num-header">Header (Lines 1 to 4)</div>
+    <div class="box num-sidebar">Sidebar (Column 1)</div>
+    <div class="box num-content">Main Content (Lines 2 to 4)</div>
+    <div class="box num-footer">Footer (Lines 1 to 4)</div>
+  </div>
+
+
+  <h2>Method 2: Grid Named Areas</h2>
+  <p class="description">Structured via a visual text map: <code>grid-template-areas: "head head head"...</code></p>
+
+  <div class="grid-by-areas">
+    <header class="box area-header">Header (head)</header>
+    <aside class="box area-sidebar">Sidebar (side)</aside>
+    <main class="box area-content">Main Content (main)</main>
+    <footer class="box area-footer">Footer (foot)</footer>
+  </div>
+
+</body>
+</html>

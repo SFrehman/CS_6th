@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>form</title>
+  </head>
+  <body>
+    <form action="script.js" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Name" />
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Email" />
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Password" />
+      <label for="male">
+        <input type="radio" name="gender" id="male" value="male" />
+        Male
+      </label>
+      <label for="female">
+        <input type="radio" name="gender" id="female" value="female" />
+        Female
+      </label>
+      <label for="checkbox">
+        <input type="checkbox" name="checkbox" id="human" />
+        Are you human?
+      </label>
+      <button type="submit" id="submit">Submit</button>
+    </form>
+  </body>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 300px;
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 5px;
+      border: #111111 solid 1px;
+    }
+    input {
+      padding: 10px;
+      border: #111111 solid 1px;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: radial-gradient(circle, yellow, green);
+      color: white;
+      cursor: pointer;
+    }
+    #male {
+      margin-right: 5px;
+    }
+    #female {
+      margin-right: 5px;
+    }
+    #human {
+      margin-right: 5px;
+    }
+  </style>
+  <script>
+    submit = document.getElementById("submit");
+    submit.onclick = function (event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      alert(
+        `Name: ${name}\nEmail: ${email}\nPassword: ${password}\nGender: ${
+          document.querySelector('input[name="gender"]:checked')?.value ||
+          "Not specified"
+        }\nAre you human? ${document.getElementById("human").checked ? "Yes" : "No"}`,
+      );
+    };
+  </script>
+</html>
