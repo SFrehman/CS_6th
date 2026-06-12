@@ -1,6 +1,7 @@
 import pandas as pd
 from collections import defaultdict
 import math
+from sklearn.model_selection import train_test_split
 
 df = pd.read_csv(r"D:\CS_6th\AI Practical\3_ai-ml-ds\naive_data.csv")             # read data file
 
@@ -13,15 +14,29 @@ cond_ham = defaultdict(int)                # create Empty cond_ham dictionary to
 spam_rows = df[df['tag'] == 'spam']        # get spam rows and ham rows
 ham_rows = df[df['tag'] == 'ham']
 
-spam_train_index = int(len(spam_rows) * 0.8)         # Set spam_index at 80% of length of spam_rows
-ham_train_index  = int(len(ham_rows)  * 0.8)         # Set ham_index at 80% of length of ham_rows
+# spam_train_index = int(len(spam_rows) * 0.8)         # Set spam_index at 80% of length of spam_rows
+# ham_train_index  = int(len(ham_rows)  * 0.8)         # Set ham_index at 80% of length of ham_rows
 
-test_spam  = spam_rows[spam_train_index:]            # Extract from that spam_index to end for testing
-test_ham   = ham_rows[ham_train_index:]              # Extract from that ham_index to end for testing
+# test_spam  = spam_rows[spam_train_index:]            # Extract from that spam_index to end for testing
+# test_ham   = ham_rows[ham_train_index:]              # Extract from that ham_index to end for testing
 
-train_spam  = spam_rows[:spam_train_index]            # Extract from start to that spam_index for training
-train_ham   = ham_rows[:ham_train_index]              # Extract from start to that ham_index for training
+# train_spam  = spam_rows[:spam_train_index]           # Extract from start to that spam_index for training
+# train_ham   = ham_rows[:ham_train_index]             # Extract from start to that ham_index for training
 
+# Split training and testing rows from spam_rows
+train_spam, test_spam = train_test_split(spam_rows, test_size=0.2, random_state=42)
+
+# Split training and testing rows from ham_rows
+train_ham, test_ham = train_test_split(ham_rows, test_size=0.2, random_state=42)
+
+# print("Spam:", len(spam_rows))
+# print("Ham :", len(ham_rows))
+
+# print("Train Spam:", len(train_spam))
+# print("Test Spam :", len(test_spam))
+
+# print("Train Ham :", len(train_ham))
+# print("Test Ham  :", len(test_ham))
 
 for index in train_spam['text']:
     for word in index.split(' '):          # Count each word in spam rows and store in spam_bag and vocab
@@ -102,26 +117,26 @@ print(f'F1-Score: {f1}')
 
 #---------------------------------------- prediction by taking input ::
 
-def predict(text):
-    prob_spam = math.log(prior_spam)
-    prob_ham  = math.log(prior_ham)
+# def predict(text):
+#     prob_spam = math.log(prior_spam)
+#     prob_ham  = math.log(prior_ham)
 
-    for word in text.lower().split(' '):
-        if word in vocab:
-            prob_spam += math.log(cond_spam[word])
-            prob_ham  += math.log(cond_ham[word])
+#     for word in text.lower().split(' '):
+#         if word in vocab:
+#             prob_spam += math.log(cond_spam[word])
+#             prob_ham  += math.log(cond_ham[word])
 
-    if prob_spam >= prob_ham:
-        return 'spam'
-    else:
-        return 'ham'
+#     if prob_spam >= prob_ham:
+#         return 'spam'
+#     else:
+#         return 'ham'
 
-while True:
-    user_input = input("\nEnter email text (or 'quit' to exit): ")
-    if user_input.lower() == 'quit':
-        break
-    result = predict(user_input)
-    print(f"Prediction: {result}")
+# while True:
+#     user_input = input("\nEnter email text (or 'quit' to exit): ")
+#     if user_input.lower() == 'quit':
+#         break
+#     result = predict(user_input)
+#     print(f"Prediction: {result}")
 
 # Spam :: win free money now click prize
 # Hame :: meeting at 10am tomorrow, please confirm your attendance
