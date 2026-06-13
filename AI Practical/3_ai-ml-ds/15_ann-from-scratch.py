@@ -1,69 +1,89 @@
-import random                         # Import random module
-import numpy as np                    # Import NumPy for matrix operations
-import math                           # Import math functions
+import random
+import numpy as np
+import math
 
-def calculate_sigmoid(x, b):          # Function to apply sigmoid activation
-    sig = []                          # Store sigmoid outputs
-    for i in range(b):                
-        sigmoid = 1/(1+math.exp(-x[i][0]))  # Calculate sigmoid value
-        sig.append(sigmoid)          
-    return sig                        
+"""
+Architecture:
+Input Layer  →  Hidden Layer  →  Output Layer
 
-class NeuralNetwork:
-    def three_layer(self):            
+x1
+    ->  h1
+x2          ->  o
+    ->  h2
+x3
 
-        input = [[random.random() for _ in range(3)],     
-                 [random.random() for _ in range(3)],      
-                 [random.random() for _ in range(3)]]      
+"""
+def ann_one_hidden_layer():
+    #================ Input Layer =================
 
-        w1 = [[random.random() for _ in range(3)],          
-              [random.random() for _ in range(3)]]
-        b1 = [random.random() for _ in range(2)]            
+    # 3 input nodes
+    input1 = [random.random() for _ in range(3)]
 
-        w2 = [[random.random() for _ in range(2)],          
-              [random.random() for _ in range(2)]]
-        b2 = [random.random() for _ in range(2)]            
-        w3 = [random.random() for _ in range(2)]            
-        b3 = [random.random()]                       
+    """
+    input1 = [x1, x2, x3]
+    """
 
-        output1 = np.dot(input, np.array(w1).T) + b1       # Calculate first layer output
-        output2 = np.dot(output1, np.array(w2).T) + b2     # Calculate second layer output
-        output3 = np.dot(output2, np.array(w3).T) + b3     # Calculate final output
+    #================ Input → Hidden Layer =================
 
-        print(output1)                                     
-        print(output2)                                     
-        print(output3)                                     
+    # 3 inputs → 2 hidden neurons (6 weights total)
+    weights1 = np.array([[random.random() for _ in range(3)],
+                        [random.random() for _ in range(3)]])
 
-        sig1 = 1/(1+math.exp(-output3[0]))                 # Apply sigmoid to output 1
-        sig2 = 1/(1+math.exp(-output3[1]))                 # Apply sigmoid to output 2
-        sig3 = 1/(1+math.exp(-output3[2]))                 # Apply sigmoid to output 3
+    """
+    weights1 = [[w11, w12, w13],
+                [w21, w22, w23]]
 
-        print(f'Sigmoid: {sig1, sig2, sig3}')               
+    """
 
-class NeuralNetworkLayer:
-    def initialize_weights_bias(self, neurons, inputs):   # Initialize weights and biases
-        self.weights = [[random.random() for _ in range(neurons)]   # Create random weights
-                        for _ in range(inputs)]
-        self.bias = [random.random() for _ in range(neurons)]       # Create random biases
+    # 2 biases (one per hidden neuron)
+    bias1 = [random.random() for _ in range(2)]
 
-    def feed_forward(self, input):                        # Perform forward propagation
-        self.output = np.dot(input, self.weights) + self.bias   
+    """
+    bias1 = [b1, b2]
+    """
 
+    # Hidden layer output
+    hidden_output = np.dot(input1, weights1.T) + bias1
 
-input_layer = NeuralNetworkLayer()        # Create input layer object
-hidden_layer = NeuralNetworkLayer()       # Create hidden layer object
-output_layer = NeuralNetworkLayer()       # Create output layer object
+    """
+    h1 = x1*w11 + x2*w12 + x3*w13 + b1
+    h2 = x1*w21 + x2*w22 + x3*w23 + b2
+    hidden_output = [h1, h2]
+    """
 
-input_layer.initialize_weights_bias(6, 8)   # Initialize input layer weights and biases
-hidden_layer.initialize_weights_bias(3, 6)  # Initialize hidden layer weights and biases
-output_layer.initialize_weights_bias(1, 3)  # Initialize output layer weights and biases
+    #================ Hidden → Output Layer =================
 
-X = [[random.random() for _ in range(8)]    # Generate sample input data
-     for _ in range(3)
-    ]
+    # 2 hidden neurons → 1 output neuron
+    weights2 = np.array([random.random() for _ in range(2)])
 
-input_layer.feed_forward(X)                 # Pass data through input layer
-hidden_layer.feed_forward(input_layer.output)  # Pass output to hidden layer
-output_layer.feed_forward(hidden_layer.output) # Pass output to output layer
+    """
+    weights2 = [w1, w2]
 
-print(calculate_sigmoid(output_layer.output, 3))  # Display final sigmoid predictions
+    """
+
+    # single bias for output neuron
+    bias2 = random.random()
+
+    """
+    bias2 = b1
+    """
+
+    # final output
+    output = np.dot(hidden_output, weights2) + bias2
+
+    """
+    o1 = h1*w1 + h2*w2 + b1
+    output = final result (o1)
+    """
+    # print("Input Layer   :", input1)
+    # print("Hidden Layer  :", hidden_output)
+    # print("Output Layer  :", output)
+
+    #======== activation function using sigmoid formula ===========
+    # 1/(1 + e^(-x))
+    final_output = 1/(1 + math.exp(-output))
+
+    print(f"final_output : \n{final_output}")
+
+if __name__ == "__main__":
+    ann_one_hidden_layer()
