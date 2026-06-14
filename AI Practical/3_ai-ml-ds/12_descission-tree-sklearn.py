@@ -9,14 +9,17 @@ df = pd.read_csv(
 
 dt_model = DecisionTreeClassifier()
 
-dt_model.fit(df[['study', 'attendance', 'assignments']], df.result)
+x = df[['study', 'attendance', 'assignments']]
+y = df['result']
+
+dt_model.fit(x,y)
 
 print(dt_model.predict([[1,70,2]]))
 
 
-"""
-Decision Plot Tree
-"""
-plt.figure(figsize=(10,6))
-plot_tree(dt_model, feature_names=df[['study', 'attendance', 'assignments']].columns, filled=True)
-plt.show()
+# """
+# Decision Plot Tree
+# """
+# plt.figure(figsize=(10,6))
+# plot_tree(dt_model, feature_names=df[['study', 'attendance', 'assignments']].columns, filled=True)
+# plt.show()

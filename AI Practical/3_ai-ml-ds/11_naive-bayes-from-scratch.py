@@ -12,6 +12,7 @@ cond_spam = defaultdict(int)               # create Empty cond_spam dictionary t
 cond_ham = defaultdict(int)                # create Empty cond_ham dictionary to store conditional probabilities
 
 spam_rows = df[df['tag'] == 'spam']        # get spam rows and ham rows
+
 ham_rows = df[df['tag'] == 'ham']
 
 # spam_train_index = int(len(spam_rows) * 0.8)         # Set spam_index at 80% of length of spam_rows
@@ -52,15 +53,15 @@ prior_spam = len(train_spam) / (len(train_spam) + len(train_ham))  # Prior Proba
 prior_ham = len(train_ham) / (len(train_spam) + len(train_ham))    # total (spam_OR_ham) rows/total rows(spam+ham)
 
 
-total_words_spam = len(spam_bag) # Total words in spam rows
-total_words_ham = len(ham_bag) # Total words in ham rows
-total_words_vocab = len(vocab) # Total unique words across entire dataset
+total_words_spam = len(spam_bag) 		# Total words in spam rows
+total_words_ham = len(ham_bag) 			# Total words in ham rows
+total_words_vocab = len(vocab)			# Total unique words across entire dataset
 
 for word in vocab:
 
     # Using Laplace formula :: P(word|spam) = (count(word in spam) + 1) / (total words in spam + total unique words in vocab)
     cond_spam[word] = (spam_bag[word] + 1) / (total_words_spam + total_words_vocab)
-    
+ 
     # Using Laplace formula :: P(word|ham) = (count(word in ham) + 1) / (total words in ham + total unique words in vocab)
     cond_ham[word] = (ham_bag[word] + 1) / (total_words_ham + total_words_vocab)
     
@@ -100,7 +101,7 @@ for row in test_ham['text']:                            # Testing Ham rows
         fp +=1
 
 
-print(tp, tn, fp, fn)
+# print(tp, tn, fp, fn)
 
 
 acc = (tp + tn) / (tp+tn+fp+fn)
