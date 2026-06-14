@@ -17,5 +17,5 @@ if __name__=="__main__":
     b = 3
     points = 3
     no_itrations = points - 1
-    h = (b - a)/2
+    h = (b - a)/no_itrations
     Trapezoidal(a,b,no_itrations,h)
