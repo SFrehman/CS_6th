@@ -12,11 +12,7 @@ def bisection(a, b, n):
     for i in range(n):
         mid = (a + b) / 2
         
-        if f(mid) == 0 or (-0.001 < f(mid) < 0.001):
-            print(f"iteration no {i} :\t Solutions : {mid}")
-            print(f"Found solution at itration {i} : sol : {mid:.0f}")
-            break
-        elif f(a) * f(mid) > 0:
+        if f(a) * f(mid) > 0:
             a = mid
         else:
             b = mid
