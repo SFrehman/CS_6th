@@ -10,12 +10,6 @@ def raphson(a, n):
         if df(x) == 0:
             print(f"Iteration {i}: Derivative is zero! Cannot divide by zero.")
             return
-
-        # to stop loop when solution found
-        if f(x) == 0 or (-0.001 < f(x) < 0.001):
-            print(f"iteration no {i} :\t Solutions : {x}")
-            print(f"Found at {i} :\t Sol : {x:.0f}")
-            return
         
         # Main Formula of Raphson
         x = x - (f(x) / df(x))
