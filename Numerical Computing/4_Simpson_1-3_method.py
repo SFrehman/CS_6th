@@ -6,7 +6,7 @@ def Simpson_1_3(start,end,n,h):
     x=start
     for i in range(1,n):
         x=x+h
-        if x%2 != 0:
+        if i%2 != 0:
             total_sum += 4 * f(x)
         else:
             total_sum += 2 * f(x)
