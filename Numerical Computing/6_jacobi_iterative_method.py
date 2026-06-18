@@ -36,14 +36,14 @@ def jacobi_method(A, b, x0=None, tol=1e-10, max_iter=100):
     for k in range(max_iter):                               # loop for number of itrations
 
         for i in range(n):                                  # loop to itrate first row of first matrix A
-            sum1 = 0.0
+            sum = 0.0
 
             for j in range(n):                              # for each index of first matrix's row, Loop will itrate 2nd matrix's column
                 if i != j:                                  # if its not diagonal like 1x1 , 2x2 , 3x3
-                    sum1 += A[i][j] * x[j]                  # multiply index of first row to 2nd matrix indexe  
+                    sum += A[i][j] * x[j]                  # multiply index of first row to 2nd matrix indexe  
                                                             # Due to loop first matrix each index in row is multiples all indexes of 2nd matrix  
-            x_new[i] = (b[i] - sum1) / A[i][i]              # function to find our answer rows index like x0 , x1 , x2
-
+            x_new[i] = (b[i] - sum) / A[i][i]              # function to find our answer rows index like x0 , x1 , x2
+        print(f"output {k} : {x_new}")
         # check convergence
         if np.linalg.norm(x_new - x, ord=np.inf) < tol:     # function to check if answers stoped changing or not if yes ends loop else next itrations
             return x_new, k + 1
@@ -64,5 +64,5 @@ if __name__ == "__main__":
 
     sol, iters = jacobi_method(A, b)
 
-    print("Solution:", sol)
-    print("Iterations:", iters)
+    print(f"Solution: {sol}")
+    print(f"Iterations: {iters}", )

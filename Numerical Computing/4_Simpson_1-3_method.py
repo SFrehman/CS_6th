@@ -6,10 +6,10 @@ def Simpson_1_3(start,end,n,h):
     x=start
     for i in range(1,n):
         x=x+h
-        if i%2 != 0:
-            total_sum += 4 * f(x)
-        else:
+        if i%2 == 0:
             total_sum += 2 * f(x)
+        else:
+            total_sum += 4 * f(x)
     result = (h/3) * (total_sum)
     print(f"Result : {result}")
 

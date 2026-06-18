@@ -6,15 +6,13 @@ def bisection(a, b, n):
         print("Solution in these roots does not exist")
         return
     
-    for i in range(1, n + 1):  # Starting from 1 makes the iteration printout cleaner
+    for i in range(n):  # Starting from 1 makes the iteration printout cleaner
         mid = (a + b) / 2
         
-        if f(mid) == 0:
-            print(f"Iteration no {i:02d} :\t Exact Solution Found: {mid}")
+        if f(mid) == 0 or -0.0001<f(mid)<0.0001:
+            print(f"Iteration no {i:02d} :\t Exact Solution Found: {mid:.4f}")
             return
-        
-        print(f"Iteration no {i:02d} :\t Current Guess: {mid:<10} | Interval: [{a:.4f}, {b:.4f}]")
-        
+        print(f"Iteration no {i+1:02d} :\t Current Guess: {mid:.4f} | Interval: [{a:.4f}, {b:.4f}]")
         # Update the boundaries
         if f(a) * f(mid) > 0:
             a = mid

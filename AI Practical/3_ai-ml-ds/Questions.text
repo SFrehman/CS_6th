@@ -1,9 +1,0 @@
-1. Difference in both
-
-    spam_train_index = int(len(spam_rows) * 0.8)         # Set spam_index at 80% of length of spam_rows
-    test_spam  = spam_rows[spam_train_index:]            # Extract from that spam_index to end for testing
-    train_spam  = spam_rows[:spam_train_index]            # Extract from start to that spam_index for training
-    
-    --------------------------
-
-    train_spam,test_spam,train_ham,test_ham=train_test_split(spam_rows,ham_rows,test_size=0.2)

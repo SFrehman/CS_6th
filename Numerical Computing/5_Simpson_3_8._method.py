@@ -1,5 +1,5 @@
 def f(x):
-    return 1/(1+x)
+    return (1/(1+x**5))
 
 def Simpson_3_8(start,end,n,h):
     total_sum = f(start) + f(end)
@@ -17,8 +17,8 @@ def Simpson_3_8(start,end,n,h):
 # ------------main------------
 if __name__=="__main__":
     a = 0
-    b = 1
-    points = 10
+    b = 3
+    points = 7
     no_itrations = points - 1
     h = (b - a)/ no_itrations
     Simpson_3_8(a,b,no_itrations,h)
